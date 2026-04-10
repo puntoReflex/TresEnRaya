@@ -1,19 +1,22 @@
 
 public class Turno {
 
+    private int valor;
+
+    public Turno() {
+        valor = (int) (Math.random() * 2);
+    }
+
     public int toca() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toca'");
+        return valor;
     }
 
     public void cambiar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiar'");
+        valor = this.noLeToca();
     }
 
     public int noLeToca() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'noLeToca'");
+        return (valor + 1) % 2;
     }
 
 }
