@@ -1,23 +1,37 @@
 
 public class Jugador {
 
-    public Jugador(char c) {
-        //TODO Auto-generated constructor stub
+    private char color;
+    private Console console;
+
+    public Jugador(char color) {
+        assert color == 'x' || color == 'o' : "Mal!!!";
+        this.color = color;
+        console = new Console();
     }
 
     public void ponerFicha(Tablero tablero) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ponerFicha'");
+        Coordenada coordenada = new Coordenada();
+        do {
+            coordenada.pedir();
+        } while (!coordenada.esValida() || tablero.estaOcupado(coordenada)); 
+        tablero.ponerFicha(coordenada,color);
     }
 
     public void moverFicha(Tablero tablero) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moverFicha'");
+        Coordenada coordenada = new Coordenada();
+        do {
+            coordenada.pedir();
+        }while(!coordenada.esValida() || tablero.estaVacio(coordenada) || tablero.verificarColorFicha(coordenada, color));
+        tablero.sacarFicha(coordenada);
+        this.ponerFicha(tablero);
     }
 
     public void celebrar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'celebrar'");
+        console.writeln("Los " + color + " somos unos cracks!!!!");
     }
 
+    public char color() {
+        return this.color;
+    }
 }

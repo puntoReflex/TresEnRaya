@@ -2,13 +2,14 @@ class Tablero {
 
     private char[][] casillas;
     final private int DIMENSION = 3;
+    final private char VACIO = '_';
     private Console console;
 
     public Tablero() {
         casillas = new char[DIMENSION][DIMENSION];
         for (int i = 0; i < DIMENSION; i++) {
             for (int j = 0; j < DIMENSION; j++) {
-                casillas[i][j] = '_';
+                casillas[i][j] = VACIO;
             }
         }
         console = new Console();
@@ -28,8 +29,8 @@ class Tablero {
     }
 
     private boolean hayTresEnRaya(char color) {
-        int[] filas = new int[3];
-        int[] columnas = new int[3];
+        int[] filas = new int[DIMENSION];
+        int[] columnas = new int[DIMENSION];
         int diagonal = 0;
         int secundaria = 0;
 
@@ -41,7 +42,7 @@ class Tablero {
                     diagonal = diagonal + ((i == j) ? 1 : 0);
                     secundaria = secundaria + ((i + j == 2) ? 1 : 0);
 
-                    if (filas[i] == 3 || columnas[j] == 3 || diagonal == 3 || secundaria == 3) {
+                    if (filas[i] == DIMENSION || columnas[j] == DIMENSION || diagonal == DIMENSION || secundaria == DIMENSION) {
                         return true;
                     }
 
@@ -63,5 +64,31 @@ class Tablero {
             }
         }
         return conteoFichas == 3;
+    }
+
+    public boolean estaOcupado(Coordenada coordenada) {
+        return !this.verificarColorFicha(coordenada, VACIO);
+    }
+
+    public void ponerFicha(Coordenada coordenada, char color) {
+        int fila = coordenada.getFila();
+        int columna = coordenada.getColumna();
+        casillas[fila][columna] = color;
+    }
+
+    public boolean estaVacio(Coordenada coordenada) {
+        return !this.estaOcupado(coordenada);
+    }
+
+    public boolean verificarColorFicha(Coordenada coordenada, char color) {
+        int fila = coordenada.getFila();
+        int columna = coordenada.getColumna();
+        return casillas[fila][columna] == color;
+    }
+
+    public void sacarFicha(Coordenada coordenada) {
+        int fila = coordenada.getFila();
+        int columna = coordenada.getColumna();
+        casillas[fila][columna] = VACIO;
     }
 }
