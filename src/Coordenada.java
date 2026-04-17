@@ -1,24 +1,32 @@
 
 public class Coordenada {
 
+    private int fila;
+    private int columna;
+    private Console console;
+
+    public Coordenada() {
+        console = new Console();
+    }
+
     public void pedir() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pedir'");
+        
+        do {
+            fila = console.readInt("Dime la fila: ");
+            columna = console.readInt("Dime la columna: ");
+        } while(!this.esValida());
     }
 
     public boolean esValida() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'esValida'");
+        return (fila >= 1 && fila <= 3 && columna >= 1 && columna <= 3);
     }
 
     public int getFila() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getFila'");
+        return fila-1;
     }
 
     public int getColumna() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getColumna'");
+        return columna-1;
     }
 
 }
